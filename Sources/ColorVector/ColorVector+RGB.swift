@@ -7,18 +7,20 @@
 
 import Foundation
 
-extension ColorVector {
-  public var rgbo: (r: Double, g: Double, b: Double, o: Double) {
-    let rgbColor = color(in: .rgb)
-    assert(rgbColor.space == .rgb)
-    return (rgbColor.v.x, rgbColor.v.y, rgbColor.v.z, rgbColor.v.w)
-  }
+public extension ColorVector {
+    var rgbo: (r: Double, g: Double, b: Double, o: Double) {
+        let rgbColor = color(in: .rgb)
+        assert(rgbColor.space == .rgb)
+        return (rgbColor.v.x, rgbColor.v.y, rgbColor.v.z, rgbColor.v.w)
+    }
 
-  public var rgba: (r: Double, g: Double, b: Double, a: Double) {
-    (rgbo.r, rgbo.g, rgbo.b, rgbo.o)
-  }
+    var rgba: (r: Double, g: Double, b: Double, a: Double) {
+        let value = rgbo
+        return (value.r, value.g, value.b, value.o)
+    }
 
-  public var rgb: (r: Double, g: Double, b: Double) {
-    (rgbo.r, rgbo.g, rgbo.b)
-  }
+    var rgb: (r: Double, g: Double, b: Double) {
+        let value = rgbo
+        return (value.r, value.g, value.b)
+    }
 }

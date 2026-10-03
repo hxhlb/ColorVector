@@ -4,7 +4,7 @@ Used for color with conversion between different color spaces.
 
 ## Platform
 
-Works on `Foundation` available devices. Should work on all Swift supported platforms.
+Requires Swift 6.2 or later. Supports iOS 15+, macOS 12+, macCatalyst 15+, tvOS 15+, and visionOS 1+.
 
 ## Usage
 
@@ -12,7 +12,7 @@ Add this package into your project.
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/Lakr233/ColorVector.git", from: "1.0.0"),
+    .package(url: "https://github.com/Lakr233/ColorVector.git", from: "2.0.0"),
 ]
 ```
 

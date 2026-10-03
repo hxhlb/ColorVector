@@ -1,83 +1,84 @@
+@testable import ColorVector
 import XCTest
 
-@testable import ColorVector
-
 final class ColorVectorTests: XCTestCase {
-  func checkColorEquation(_ lhs: ColorVector, _ rhs: ColorVector) {
-    for i in 0..<4 {
-      XCTAssertEqual(lhs.v[i], rhs.v[i], accuracy: 1)
-    }
-  }
-
-  func testConversionMap() throws {
-    print("[*] initializing color conversion...")
-    ColorConversion.initialize()
-
-    var testCount = 0
-    for from in ColorVector.Space.allCases {
-      for to in ColorVector.Space.allCases {
-        testCount += 1
-
-        let fromColor = ColorVector(
-          v: .init(
-            Double.random(in: 0...1),
-            Double.random(in: 0...1),
-            Double.random(in: 0...1),
-            Double.random(in: 0...1)
-          ), space: from)
-        let toColor = ColorConversion.convert(fromColor, to: to)
-        let backColor = ColorConversion.convert(toColor, to: from)
-        checkColorEquation(fromColor, backColor)
-
-        let output = [
-          "[*] test index: \(testCount)",
-          "  > from color space: \(from)",
-          "    v1: \(fromColor.v.x) v2: \(fromColor.v.y) v3: \(fromColor.v.z) v4: \(fromColor.v.w)",
-          "  > to color space: \(to)",
-          "    v1: \(toColor.v.x) v2: \(toColor.v.y) v3: \(toColor.v.z) v4: \(toColor.v.w)",
-          "  > back to color space: \(from)",
-          "    v1: \(backColor.v.x) v2: \(backColor.v.y) v3: \(backColor.v.z) v4: \(backColor.v.w)",
-        ].joined(separator: "\n")
-        print(output)
-        fflush(stdout)
-      }
+    func checkColorEquation(_ lhs: ColorVector, _ rhs: ColorVector) {
+        for i in 0 ..< 4 {
+            XCTAssertEqual(lhs.v[i], rhs.v[i], accuracy: 1)
+        }
     }
 
-    let from = ColorVector.Space.rgb
-    for to in ColorVector.Space.allCases {
-      for _ in 0...255 {
-        testCount += 1
+    func testConversionMap() {
+        print("[*] initializing color conversion...")
+        ColorConversion.initialize()
 
-        let fromColor = ColorVector(
-          v: .init(
-            Double.random(in: 0...255),
-            Double.random(in: 0...255),
-            Double.random(in: 0...255),
-            Double.random(in: 0...1)
-          ), space: from)
-        let toColor = ColorConversion.convert(fromColor, to: to)
-        let backColor = ColorConversion.convert(toColor, to: from)
-        checkColorEquation(fromColor, backColor)
+        var testCount = 0
+        for from in ColorVector.Space.allCases {
+            for to in ColorVector.Space.allCases {
+                testCount += 1
 
-        let output = [
-          "[*] test index: \(testCount)",
-          "  > from color space: \(from)",
-          "    v1: \(fromColor.v.x) v2: \(fromColor.v.y) v3: \(fromColor.v.z) v4: \(fromColor.v.w)",
-          "  > to color space: \(to)",
-          "    v1: \(toColor.v.x) v2: \(toColor.v.y) v3: \(toColor.v.z) v4: \(toColor.v.w)",
-          "  > back to color space: \(from)",
-          "    v1: \(backColor.v.x) v2: \(backColor.v.y) v3: \(backColor.v.z) v4: \(backColor.v.w)",
-        ].joined(separator: "\n")
-        print(output)
-        fflush(stdout)
-      }
+                let fromColor = ColorVector(
+                    v: .init(
+                        Double.random(in: 0 ... 1),
+                        Double.random(in: 0 ... 1),
+                        Double.random(in: 0 ... 1),
+                        Double.random(in: 0 ... 1),
+                    ), space: from,
+                )
+                let toColor = ColorConversion.convert(fromColor, to: to)
+                let backColor = ColorConversion.convert(toColor, to: from)
+                checkColorEquation(fromColor, backColor)
+
+                let output = [
+                    "[*] test index: \(testCount)",
+                    "  > from color space: \(from)",
+                    "    v1: \(fromColor.v.x) v2: \(fromColor.v.y) v3: \(fromColor.v.z) v4: \(fromColor.v.w)",
+                    "  > to color space: \(to)",
+                    "    v1: \(toColor.v.x) v2: \(toColor.v.y) v3: \(toColor.v.z) v4: \(toColor.v.w)",
+                    "  > back to color space: \(from)",
+                    "    v1: \(backColor.v.x) v2: \(backColor.v.y) v3: \(backColor.v.z) v4: \(backColor.v.w)",
+                ].joined(separator: "\n")
+                print(output)
+                fflush(stdout)
+            }
+        }
+
+        let from = ColorVector.Space.rgb
+        for to in ColorVector.Space.allCases {
+            for _ in 0 ... 255 {
+                testCount += 1
+
+                let fromColor = ColorVector(
+                    v: .init(
+                        Double.random(in: 0 ... 255),
+                        Double.random(in: 0 ... 255),
+                        Double.random(in: 0 ... 255),
+                        Double.random(in: 0 ... 1),
+                    ), space: from,
+                )
+                let toColor = ColorConversion.convert(fromColor, to: to)
+                let backColor = ColorConversion.convert(toColor, to: from)
+                checkColorEquation(fromColor, backColor)
+
+                let output = [
+                    "[*] test index: \(testCount)",
+                    "  > from color space: \(from)",
+                    "    v1: \(fromColor.v.x) v2: \(fromColor.v.y) v3: \(fromColor.v.z) v4: \(fromColor.v.w)",
+                    "  > to color space: \(to)",
+                    "    v1: \(toColor.v.x) v2: \(toColor.v.y) v3: \(toColor.v.z) v4: \(toColor.v.w)",
+                    "  > back to color space: \(from)",
+                    "    v1: \(backColor.v.x) v2: \(backColor.v.y) v3: \(backColor.v.z) v4: \(backColor.v.w)",
+                ].joined(separator: "\n")
+                print(output)
+                fflush(stdout)
+            }
+        }
+
+        usleep(500)
     }
-
-    usleep(500)
-  }
 }
 
-//private extension ColorVector.Space {
+// private extension ColorVector.Space {
 //    typealias ValidRange = ClosedRange<Double>
 //    typealias VectorForClosedRange4 = (
 //        ValidRange?,
@@ -107,4 +108,4 @@ final class ColorVectorTests: XCTestCase {
 //        }
 //
 //    }
-//}
+// }

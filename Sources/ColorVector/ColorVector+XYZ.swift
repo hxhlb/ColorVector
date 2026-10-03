@@ -7,18 +7,20 @@
 
 import Foundation
 
-extension ColorVector {
-  public var xyzo: (x: Double, y: Double, z: Double, o: Double) {
-    let xyzColor = color(in: .xyz)
-    assert(xyzColor.space == .xyz)
-    return (xyzColor.v.x, xyzColor.v.y, xyzColor.v.z, xyzColor.v.w)
-  }
+public extension ColorVector {
+    var xyzo: (x: Double, y: Double, z: Double, o: Double) {
+        let xyzColor = color(in: .xyz)
+        assert(xyzColor.space == .xyz)
+        return (xyzColor.v.x, xyzColor.v.y, xyzColor.v.z, xyzColor.v.w)
+    }
 
-  public var xyza: (x: Double, y: Double, z: Double, a: Double) {
-    (xyzo.x, xyzo.y, xyzo.z, xyzo.o)
-  }
+    var xyza: (x: Double, y: Double, z: Double, a: Double) {
+        let value = xyzo
+        return (value.x, value.y, value.z, value.o)
+    }
 
-  public var xyz: (x: Double, y: Double, z: Double) {
-    (xyzo.x, xyzo.y, xyzo.z)
-  }
+    var xyz: (x: Double, y: Double, z: Double) {
+        let value = xyzo
+        return (value.x, value.y, value.z)
+    }
 }

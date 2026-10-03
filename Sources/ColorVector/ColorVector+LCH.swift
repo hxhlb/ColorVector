@@ -7,18 +7,20 @@
 
 import Foundation
 
-extension ColorVector {
-  public var lcho: (l: Double, c: Double, h: Double, o: Double) {
-    let lchColor = color(in: .lch)
-    assert(lchColor.space == .lch)
-    return (lchColor.v.x, lchColor.v.y, lchColor.v.z, lchColor.v.w)
-  }
+public extension ColorVector {
+    var lcho: (l: Double, c: Double, h: Double, o: Double) {
+        let lchColor = color(in: .lch)
+        assert(lchColor.space == .lch)
+        return (lchColor.v.x, lchColor.v.y, lchColor.v.z, lchColor.v.w)
+    }
 
-  public var lcha: (l: Double, c: Double, h: Double, a: Double) {
-    (lcho.l, lcho.c, lcho.h, lcho.o)
-  }
+    var lcha: (l: Double, c: Double, h: Double, a: Double) {
+        let value = lcho
+        return (value.l, value.c, value.h, value.o)
+    }
 
-  public var lch: (l: Double, c: Double, h: Double) {
-    (lcho.l, lcho.c, lcho.h)
-  }
+    var lch: (l: Double, c: Double, h: Double) {
+        let value = lcho
+        return (value.l, value.c, value.h)
+    }
 }
